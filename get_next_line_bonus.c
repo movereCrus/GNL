@@ -40,8 +40,9 @@ char *ifeol(t_fdbuf *thrd, t_var v, int fd)
 	{
 		thrd->ind[fd] = 0;
 		ft_bzero(thrd->buf[fd], BUFFER_SIZE);
-		read(fd, thrd->buf[fd], BUFFER_SIZE);
+		//read(fd, thrd->buf[fd], BUFFER_SIZE);
 	}
+	//printf("ifeol buf[0]:%c\n", thrd->buf[fd][0]);
 	return (v.str);
 }
 
@@ -67,6 +68,7 @@ ssize_t ifeof(t_fdbuf *thrd, t_var *v, int fd)
 	}
 	ft_bzero(thrd->buf[fd], BUFFER_SIZE);
 	readres = read(fd, thrd->buf[fd], BUFFER_SIZE);
+	//printf("ifeof buf[0]:%c readres:%ld i:%lu\n", thrd->buf[fd][0], readres, v->i);
 	thrd->ind[fd] = 0;
 	return (readres);
 }
@@ -76,6 +78,8 @@ size_t	bytecalc(int fd, size_t i, t_fdbuf *thrd)
 	i = thrd->ind[fd];
 	while (thrd->buf[fd][i] != '\n' && thrd->buf[fd][i])
 		i++;
+	/*if (!thrd->buf[fd][i])
+		i = 0;*/
 	return (i);
 }
 
@@ -106,17 +110,24 @@ char	*get_next_line(int fd)
 	}
 	return(var.str);
 }
-
-/*int main(int argc, char **argv)
+/*
+int main(int argc, char **argv)
 {
 	(void) argc;
+	(void) **argv;
 	int		fd[3];
 	char	*str;
 
-	fd[0] = open(argv[1], O_RDONLY); //gcc -Wall -Wextra -Werror get_next_line.c -g -fsanitize=address -o get_next_line && ./get_next_line test1.txt test4.txt test3.txt | cat -e
-	fd[1] = open(argv[2], O_RDONLY);
-	fd[2] = open(argv[3], O_RDONLY);
-	str = get_next_line(20);
+	fd[0] = open("42_with_nl", O_RDONLY); //gcc -Wall -Wextra -Werror get_next_line.c -g -fsanitize=address -o get_next_line && ./get_next_line test1.txt test4.txt test3.txt | cat -e
+	//fd[1] = open(argv[2], O_RDONLY);
+	//fd[2] = open(argv[3], O_RDONLY);
+	//str = get_next_line(20);
+	str = get_next_line(fd[0]);
+	printf("Str:%s", str);
+	free(str);
+	str = get_next_line(fd[0]);
+	printf("Str:%s", str);
+	free(str);
 	str = get_next_line(fd[0]);
 	printf("Str:%s", str);
 	free(str);
@@ -149,8 +160,8 @@ char	*get_next_line(int fd)
 	free(str);
 	str = get_next_line(fd[1]);
 	printf("Str:%s", str);
-	free(str);
-	while (1)
+	free(str);*/
+	/*while (1)
 	{
 		str = get_next_line(fd);
 		printf("Str:%s", str);
@@ -158,8 +169,8 @@ char	*get_next_line(int fd)
 		if (!str)
 			break;
 	}
-	close(fd);
-	close(fd[0]);
-	close(fd[1]);
-	close(fd[2]);
-}*/
+	close(fd);*/
+	//close(fd[0]);
+	/*close(fd[1]);
+	close(fd[2]);*/
+//}
