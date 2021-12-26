@@ -1,16 +1,4 @@
 #include "get_next_line_bonus.h"
-void    ft_bzero(void *buf, size_t count)
-{
-        unsigned char   *ptr;
-
-        ptr = (unsigned char *)buf;
-        while (count > 0)
-        {
-                *ptr = '\0';
-                ptr++;
-                count--;
-        }
-}
 
 size_t  ft_strlen(const char *str)
 {
@@ -22,43 +10,47 @@ size_t  ft_strlen(const char *str)
         return (i);
 }
 
-void    *ft_calloc(size_t len, size_t size)
+char    *ft_strjoin(char const *s1, char const *s2)
 {
-        void    *m;
+	char    *news;
+	size_t  i;
 
-        m = malloc(len * size);
-        if (m == NULL)
-                return (NULL);
-        ft_bzero(m, len * size);
-        return (m);
+	i = 0;
+	//printf(" strjoin entry, buf:%s ", s2);
+	news = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (news == NULL)
+		return (NULL);
+	//printf("strjoin malloc\n");
+	while (*s1 != '\0')
+		news[i++] = *s1++;
+	while (*s2 != '\0')
+		news[i++] = *s2++;
+	news[i] = '\0';
+	return (news);
 }
 
-char *ft_realloc(char *str, size_t nsize)
+char    *ft_strjoin_n(char const *s1, char const *s2, size_t len)
 {
-        char *tmp;
-        size_t i;
+	char    *news;
+	size_t  i;
+	size_t  j;
 
-        i = 0;
-        tmp = (char *)ft_calloc(ft_strlen(str) + 1, sizeof(char));
-        if (!tmp)
-                return (NULL);
-        while (i < ft_strlen(str))
-        {
-                tmp[i] = str[i];
-                i++;
-        }
-        tmp[i] = '\0';
-        free(str);
-        str = (char *)ft_calloc(nsize, sizeof(char));
-        if (!str)
-                return (NULL);
-        i = 0;
-        while (i < ft_strlen(tmp))
-        {
-                str[i] = tmp[i];
-                i++;
-        }
-        free(tmp);
-        return (str);
+	j = 0;
+	i = 0;
+	//printf("strjoin entry, buf:%s|", s2);
+	//printf("len:%lu\n|", len);
+	news = (char *)malloc(ft_strlen(s1) + len + 2);
+	if (news == NULL)
+		return (NULL);
+	//printf("strjoin malloc\n");
+	while (*s1 != '\0')
+		news[i++] = *s1++;
+	while (s2[j] != '\0' && j <= len)
+	{
+		news[i++] = s2[j++];
+		if (s2[j - 1] == '\n')
+			break;
+	}
+	news[i] = '\0';
+	return (news);
 }
-

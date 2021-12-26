@@ -1,16 +1,4 @@
-#include "get_next_line_bonus.h"
-void    ft_bzero(void *buf, size_t count)
-{
-        unsigned char   *ptr;
-
-        ptr = (unsigned char *)buf;
-        while (count > 0)
-        {
-                *ptr = '\0';
-                ptr++;
-                count--;
-        }
-}
+#include "get_next_line.h"
 
 size_t  ft_strlen(const char *str)
 {
@@ -22,42 +10,27 @@ size_t  ft_strlen(const char *str)
         return (i);
 }
 
-void    *ft_calloc(size_t len, size_t size)
+char    *ft_strjoin(char const *s1, char const *s2, size_t len)
 {
-        void    *m;
+	char    *news;
+	size_t  i;
+	size_t  j;
 
-        m = malloc(len * size);
-        if (m == NULL)
-                return (NULL);
-        ft_bzero(m, len * size);
-        return (m);
-}
-
-char *ft_realloc(char *str, size_t nsize)
-{
-        char *tmp;
-        size_t i;
-
-        i = 0;
-        tmp = (char *)ft_calloc(ft_strlen(str) + 1, sizeof(char));
-        if (!tmp)
-                return (NULL);
-        while (i < ft_strlen(str))
-        {
-                tmp[i] = str[i];
-                i++;
-        }
-        tmp[i] = '\0';
-        free(str);
-        str = (char *)ft_calloc(nsize, sizeof(char));
-        if (!str)
-                return (NULL);
-        i = 0;
-        while (i < ft_strlen(tmp))
-        {
-                str[i] = tmp[i];
-                i++;
-        }
-        free(tmp);
-        return (str);
+	j = 0;
+	i = 0;
+	//printf("strjoin after null\n");
+	if (!s2[len])
+		len = ft_strlen(s2);
+	else
+		len += 1;
+	news = (char *)malloc(ft_strlen(s1) + len + 1);
+	if (news == NULL)
+		return (NULL);
+	//printf("strjoin\n");
+	while (*s1 != '\0')
+		news[i++] = *s1++;
+	while (s2[j] != '\0' && j <= len)
+		news[i++] = s2[j++];
+	news[i] = '\0';
+	return (news);
 }
