@@ -1,0 +1,7 @@
+at Emitter.fire (/home/kirus/.vscode-server/extensions/ms-vscode.cpptools-1.8.0-insiders2/dist/main.js:57907:36)
+at closeHandler (/home/kirus/.vscode-server/extensions/ms-vscode.cpptools-1.8.0-insiders2/dist/main.js:58481:26)
+at CallbackList.invoke (/home/kirus/.vscode-server/extensions/ms-vscode.cpptools-1.8.0-insiders2/dist/main.js:57849:39)
+at Emitter.fire (/home/kirus/.vscode-server/extensions/ms-vscode.cpptools-1.8.0-insiders2/dist/main.js:57907:36)
+at StreamMessageReader.fireClose (/home/kirus/.vscode-server/extensions/ms-vscode.cpptools-1.8.0-insiders2/dist/main.js:59297:27)
+at Socket.<anonymous> (/home/kirus/.vscode-server/extensions/ms-vscode.cpptools-1.8.0-insiders2/dist/main.js:59337:46)
+at Socket.emit (events.js:327:22)
